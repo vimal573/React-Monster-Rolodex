@@ -1,13 +1,13 @@
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect, ChangeEvent, Key } from "react";
 
-import CardList from "./components/card-list/card-list";
+import CardList from "./components/card-list/card-list.component";
 import SearchBox from "./components/search-box/search-box.component";
 
 import { getData } from "./utils/data.utils";
 import "./App.css";
 
 export type Monster = {
-  id: String;
+  id: Key;
   name: String;
   email: String;
 };
