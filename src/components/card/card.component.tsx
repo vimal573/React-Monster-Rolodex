@@ -1,6 +1,12 @@
+import { Monster } from "../../app";
+
 import "./card.css";
 
-function Card({ monster }) {
+type CardProps = {
+  monster: Monster;
+};
+
+const Card = ({ monster }: CardProps) => {
   return (
     <div className="card-container">
       <img
@@ -11,6 +17,6 @@ function Card({ monster }) {
       <p>{monster.email}</p>
     </div>
   );
-}
+};
 
 export default Card;

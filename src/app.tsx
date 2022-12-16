@@ -1,27 +1,37 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 
 import CardList from "./components/card-list/card-list";
-import SearchBox from "./components/search-box/search-box";
+import SearchBox from "./components/search-box/search-box.component";
+
+import { getData } from "./utils/data.utils";
 import "./App.css";
 
-function App() {
-  const [monsters, setMonsters] = useState([]);
+export type Monster = {
+  id: String;
+  name: String;
+  email: String;
+};
+
+const App = () => {
+  const [monsters, setMonsters] = useState<Monster[]>([]);
   const [searchField, setSearchField] = useState("");
   const [filteredMonsters, setFilteredMonsters] = useState(monsters);
 
   const fetchMonters = async function () {
-    const { data } = await axios.get(
+    const data = await getData<Monster[]>(
       "https://jsonplaceholder.typicode.com/users"
     );
+
     setMonsters(data);
+
+    console.log(data);
   };
 
   useEffect(() => {
     fetchMonters();
   }, []);
 
-  const onSearchChange = (event) => {
+  const onSearchChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const searchString = event.target.value.toLocaleLowerCase();
     setSearchField(searchString);
   };
@@ -37,7 +47,6 @@ function App() {
   return (
     <div>
       <h1 className="app-title">Monster Rolodex</h1>
-
       <SearchBox
         onChangeHandler={onSearchChange}
         placeholder="Search monster"
@@ -46,6 +55,6 @@ function App() {
       <CardList monster={filteredMonsters} />
     </div>
   );
-}
+};
 
 export default App;

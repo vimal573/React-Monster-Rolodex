@@ -1,7 +1,13 @@
-import "./card-list.css";
-import Card from "../card/card";
+import { Monster } from "../../app";
 
-function CardList({ monster }) {
+import "./card-list.css";
+import Card from "../card/card.component";
+
+type CardListProps = {
+  monster: Monster[];
+};
+
+function CardList({ monster }: CardListProps) {
   return (
     <div className="card-list">
       {monster.map((monster) => {
